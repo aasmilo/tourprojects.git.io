@@ -329,16 +329,17 @@
             color: var(--medium-text);
         }
         
-        .action-button {
+        /* New Button System */
+        .btn {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
-            padding: 18px 35px;
-            font-size: 1.3rem;
+            padding: 16px 32px;
+            font-size: 1.2rem;
             border-radius: 50px;
             cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
             position: relative;
             overflow: hidden;
             z-index: 10;
@@ -348,9 +349,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
+            margin: 10px;
         }
         
-        .action-button::before {
+        .btn::before {
             content: "";
             position: absolute;
             top: 0;
@@ -363,7 +365,7 @@
             z-index: -1;
         }
         
-        .action-button::after {
+        .btn::after {
             content: "";
             position: absolute;
             top: 0;
@@ -376,79 +378,34 @@
             z-index: -1;
         }
         
-        .action-button:hover {
+        .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.7);
-        }
-        
-        .action-button:hover::before {
-            transform: translateX(0);
-        }
-        
-        .action-button:hover::after {
-            opacity: 1;
-        }
-        
-        .action-button:active {
-            transform: translateY(-2px);
-        }
-        
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 30px;
-            gap: 20px;
-        }
-        
-        .nav-button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            z-index: 10;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-        
-        .nav-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-            z-index: -1;
-        }
-        
-        .nav-button:hover {
-            transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(255, 107, 107, 0.7);
         }
         
-        .nav-button:hover::before {
+        .btn:hover::before {
             transform: translateX(0);
         }
         
-        .nav-button:active {
-            transform: translateY(-1px);
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            padding: 12px 24px;
+            font-size: 1rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
         
         .progress-bar {
@@ -531,26 +488,12 @@
         }
         
         .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 8px solid rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             border-top-color: var(--primary-color);
             animation: spin 1.2s ease-in-out infinite;
-            position: relative;
-        }
-        
-        .loading-spinner::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse 1.5s infinite alternate;
         }
         
         @keyframes spin {
@@ -587,7 +530,7 @@
             50% { opacity: 1; transform: scale(1.05); }
         }
         
-        /* Particle effect */
+        /* Optimized Particle effect */
         .particles {
             position: absolute;
             top: 0;
@@ -596,16 +539,18 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
+            pointer-events: none;
         }
         
         .particle {
             position: absolute;
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
             background: var(--primary-color);
             opacity: 0;
             animation: float-particle 15s infinite;
+            will-change: transform, opacity;
         }
         
         @keyframes float-particle {
@@ -625,7 +570,7 @@
             }
         }
         
-        /* Light rays effect */
+        /* Light rays effect - simplified */
         .light-rays {
             position: absolute;
             top: 0;
@@ -634,7 +579,8 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.2;
+            pointer-events: none;
         }
         
         .light-ray {
@@ -646,6 +592,7 @@
             background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
             transform-origin: top center;
             animation: rotate-ray 20s infinite linear;
+            will-change: opacity, transform;
         }
         
         .light-ray:nth-child(1) {
@@ -654,77 +601,13 @@
         }
         
         .light-ray:nth-child(2) {
-            transform: translate(-50%, -50%) rotate(45deg);
-            animation-delay: 2.5s;
-        }
-        
-        .light-ray:nth-child(3) {
             transform: translate(-50%, -50%) rotate(90deg);
             animation-delay: 5s;
         }
         
-        .light-ray:nth-child(4) {
-            transform: translate(-50%, -50%) rotate(135deg);
-            animation-delay: 7.5s;
-        }
-        
         @keyframes rotate-ray {
-            0% { opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { opacity: 0; }
-        }
-        
-        /* Glowing orbs effect */
-        .orbs {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-            filter: blur(10px);
-            opacity: 0.4;
-            animation: float-orb 20s infinite ease-in-out;
-        }
-        
-        .orb:nth-child(1) {
-            width: 200px;
-            height: 200px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .orb:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            left: 80%;
-            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-            animation-delay: 5s;
-        }
-        
-        .orb:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            left: 60%;
-            animation-delay: 10s;
-        }
-        
-        @keyframes float-orb {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(20px, -20px); }
-            50% { transform: translate(-20px, 20px); }
-            75% { transform: translate(10px, 10px); }
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.3; }
         }
         
         /* Responsive adjustments */
@@ -753,14 +636,15 @@
                 font-size: 1.5rem;
             }
             
-            .nav-buttons {
+            .btn-group {
                 flex-direction: column;
-                max-width: 250px;
+                align-items: center;
             }
             
-            .action-button {
-                padding: 15px 30px;
+            .btn {
+                padding: 14px 28px;
                 font-size: 1.1rem;
+                margin: 5px 0;
             }
         }
     </style>
@@ -774,22 +658,11 @@
             <div class="loading-spinner"></div>
         </div>
         
-        <!-- Particles Effect -->
+        <!-- Simplified Effects -->
         <div class="particles" id="particles"></div>
-        
-        <!-- Light Rays Effect -->
         <div class="light-rays">
             <div class="light-ray"></div>
             <div class="light-ray"></div>
-            <div class="light-ray"></div>
-            <div class="light-ray"></div>
-        </div>
-        
-        <!-- Glowing Orbs Effect -->
-        <div class="orbs">
-            <div class="orb"></div>
-            <div class="orb"></div>
-            <div class="orb"></div>
         </div>
         
         <!-- Start Page -->
@@ -804,7 +677,7 @@
                 </div>
                 <h1>Places to visit in Albania</h1>
                 <p>Discover the breathtaking beauty and rich cultural heritage of Albania through this virtual tour of its most stunning landmarks.</p>
-                <button class="action-button" id="startBtn">
+                <button class="btn" id="startBtn" data-target="1">
                     Start Tour <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
@@ -827,11 +700,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1605007590374-47c1df5455a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berat Castle" class="landmark-image">
                 <p>Berat Castle is a magnificent fortress overlooking the historic town of Berat. Dating mainly from the 13th century, this UNESCO World Heritage site contains numerous Byzantine churches, Ottoman mosques, and traditional houses that offer a glimpse into Albania's rich cultural heritage.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="0">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="2">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -855,11 +728,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1599142351577-9c1a29d4b40b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gjirokastër" class="landmark-image">
                 <p>Nestled in a valley between the Gjerë mountains and the Drino River, Gjirokastër is a captivating city known as the "City of Stone." Its well-preserved Ottoman architecture, distinctive stone-roofed houses, and imposing castle have earned it recognition as a UNESCO World Heritage Site.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="1">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="3">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -883,11 +756,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1596474104294-0c9175d9415d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Butrint" class="landmark-image">
                 <p>Butrint National Park is home to an ancient Greek city and archaeological site that has been occupied since prehistoric times. This UNESCO World Heritage Site features impressive ruins including a theater, temple, and baptistery, all set within a beautiful natural landscape of forests and wetlands.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="2">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="4">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -911,11 +784,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1596436889106-be35e8cbf525?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Krujë Castle" class="landmark-image">
                 <p>Perched on a mountain overlooking the town of Krujë, this historic castle is one of Albania's most important landmarks. It served as the center of the Albanian resistance against the Ottoman Empire in the 15th century under the leadership of national hero Skanderbeg, whose museum is now housed within the castle walls.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="3">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="5">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -939,11 +812,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Albanian Riviera" class="landmark-image">
                 <p>The Albanian Riviera is a stunning coastal area along the Ionian Sea, known for its crystal-clear turquoise waters, pristine beaches, and charming Mediterranean villages. From the vibrant nightlife of Dhërmi to the secluded beauty of Gjipe Beach, this stretch of coastline offers something for every traveler.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="4">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="6">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -967,11 +840,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1595760780347-f159642c59d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lake Ohrid" class="landmark-image">
                 <p>Straddling the mountainous border between southwestern North Macedonia and eastern Albania, Lake Ohrid is one of Europe's deepest and oldest lakes. This UNESCO World Heritage Site is renowned for its exceptional biodiversity, crystal-clear waters, and numerous historical sites along its shores.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="5">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="7">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -995,11 +868,11 @@
                 </div>
                 <img src="https://images.unsplash.com/photo-1596421604626-2b0c9e0c6c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Valbona Valley" class="landmark-image">
                 <p>Located in the Albanian Alps, Valbona Valley National Park is a paradise for nature lovers and hikers. The park features rugged mountain peaks, glacial valleys, and the stunning Valbona River. Its pristine beauty and diverse wildlife make it one of Albania's most spectacular natural attractions.</p>
-                <div class="nav-buttons">
-                    <button class="nav-button prev-btn">
+                <div class="btn-group">
+                    <button class="btn btn-nav" data-target="6">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn">
+                    <button class="btn btn-nav" data-target="8">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1020,7 +893,7 @@
                 <div class="end-credits">
                     Made by: A.B and A.K
                 </div>
-                <button class="action-button" id="restartBtn" style="margin-top: 30px;">
+                <button class="btn" id="restartBtn" data-target="0" style="margin-top: 30px;">
                     Restart Tour <i class="fas fa-redo"></i>
                 </button>
             </div>
@@ -1041,24 +914,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Cache DOM elements
             const pages = document.querySelectorAll('.page');
             const navDots = document.querySelectorAll('.nav-dot');
             const progressBar = document.getElementById('progressBar');
             const loadingOverlay = document.getElementById('loadingOverlay');
             const particlesContainer = document.getElementById('particles');
+            
+            // State
             let currentPage = 0;
             const totalPages = pages.length;
             let isTransitioning = false;
             
-            // Create particles
+            // Create optimized particles
             function createParticles() {
-                const particleCount = 50;
+                // Reduced particle count for performance
+                const particleCount = 20;
+                const fragment = document.createDocumentFragment();
+                
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.classList.add('particle');
                     
                     // Random properties
-                    const size = Math.random() * 5 + 2;
+                    const size = Math.random() * 3 + 2;
                     const posX = Math.random() * 100;
                     const delay = Math.random() * 15;
                     const duration = Math.random() * 10 + 15;
@@ -1076,26 +955,29 @@
                     const b = Math.floor(107 + 51 * colorRatio);
                     particle.style.background = `rgb(${r}, ${g}, ${b})`;
                     
-                    particlesContainer.appendChild(particle);
+                    fragment.appendChild(particle);
                 }
+                
+                particlesContainer.appendChild(fragment);
             }
             
+            // Initialize particles
             createParticles();
             
-            // Function to show loading overlay
+            // Show loading overlay
             function showLoading() {
                 loadingOverlay.classList.add('active');
             }
             
-            // Function to hide loading overlay
+            // Hide loading overlay
             function hideLoading() {
                 setTimeout(() => {
                     loadingOverlay.classList.remove('active');
-                }, 800);
+                }, 500);
             }
             
-            // Function to show a specific page
-            function showPage(pageIndex) {
+            // Navigate to a specific page
+            function navigateToPage(pageIndex) {
                 if (isTransitioning || pageIndex < 0 || pageIndex >= totalPages) return;
                 
                 isTransitioning = true;
@@ -1113,7 +995,7 @@
                     
                     // Update progress bar
                     const progress = ((currentPage + 1) / totalPages) * 100;
-                    progressBar.style.width = progress + '%';
+                    progressBar.style.width = `${progress}%`;
                     
                     // Ensure video is playing
                     const iframe = pages[currentPage].querySelector('iframe');
@@ -1128,52 +1010,36 @@
                     hideLoading();
                     setTimeout(() => {
                         isTransitioning = false;
-                    }, 500);
-                }, 300);
+                    }, 300);
+                }, 200);
             }
             
-            // Start button functionality
-            document.getElementById('startBtn').addEventListener('click', function() {
-                showPage(1);
-            });
-            
-            // Restart button functionality
-            document.getElementById('restartBtn').addEventListener('click', function() {
-                showPage(0);
-            });
-            
-            // Previous button functionality
+            // Handle button clicks using event delegation
             document.addEventListener('click', function(event) {
-                if (event.target.closest('.prev-btn')) {
-                    if (currentPage > 0) {
-                        showPage(currentPage - 1);
-                    }
+                // Find the closest button with data-target attribute
+                const button = event.target.closest('.btn');
+                if (!button) return;
+                
+                const targetPage = parseInt(button.getAttribute('data-target'));
+                if (!isNaN(targetPage)) {
+                    navigateToPage(targetPage);
                 }
             });
             
-            // Next button functionality
-            document.addEventListener('click', function(event) {
-                if (event.target.closest('.next-btn')) {
-                    if (currentPage < totalPages - 1) {
-                        showPage(currentPage + 1);
-                    }
-                }
-            });
-            
-            // Navigation dots functionality
+            // Handle navigation dots clicks
             navDots.forEach(dot => {
                 dot.addEventListener('click', function() {
                     const pageIndex = parseInt(this.getAttribute('data-page'));
-                    showPage(pageIndex);
+                    navigateToPage(pageIndex);
                 });
             });
             
             // Keyboard navigation
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'ArrowRight' && currentPage < totalPages - 1) {
-                    showPage(currentPage + 1);
+                    navigateToPage(currentPage + 1);
                 } else if (event.key === 'ArrowLeft' && currentPage > 0) {
-                    showPage(currentPage - 1);
+                    navigateToPage(currentPage - 1);
                 }
             });
             
@@ -1193,15 +1059,15 @@
             function handleSwipe() {
                 const swipeThreshold = 50;
                 if (touchEndX < touchStartX - swipeThreshold && currentPage < totalPages - 1) {
-                    showPage(currentPage + 1); // Swipe left, go to next page
+                    navigateToPage(currentPage + 1); // Swipe left, go to next page
                 }
                 if (touchEndX > touchStartX + swipeThreshold && currentPage > 0) {
-                    showPage(currentPage - 1); // Swipe right, go to previous page
+                    navigateToPage(currentPage - 1); // Swipe right, go to previous page
                 }
             }
             
             // Initialize progress bar
-            progressBar.style.width = ((currentPage + 1) / totalPages) * 100 + '%';
+            progressBar.style.width = `${((currentPage + 1) / totalPages) * 100}%`;
             
             // Preload videos for smoother experience
             function preloadVideos() {
