@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places to visit in Albania</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #ff9e6b;
+            --dark-bg: #121212;
+            --light-text: #ffffff;
+            --medium-text: #cccccc;
+            --card-bg: rgba(0, 0, 0, 0.8);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.7);
+            --transition-speed: 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+        
+        .app-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 2;
+        }
+        
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            pointer-events: none;
+        }
+        
+        .fallback-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .content-card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            z-index: 3;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        
+        .content-card:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .icon-container {
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .icon-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+        
+        .icon-container i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            text-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
+            animation: slideIn 1s ease-out;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes expandLine {
+            to { transform: scaleX(1); }
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            animation: slideIn 1s ease-out;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--medium-text);
+            animation: fadeIn 1.5s ease-out;
+            text-align: justify;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .landmark-image {
+            width: 100%;
+            max-width: 500px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            border: 3px solid var(--border-color);
+            animation: zoomIn 1.2s ease-out;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .landmark-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 158, 107, 0.3));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+        
+        .landmark-image:hover::before {
+            opacity: 1;
+        }
+        
+        .landmark-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .landmark-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            animation: fadeIn 1.8s ease-out;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .landmark-info i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .landmark-info span {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+        }
+        
+        .action-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .action-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .action-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.7);
+        }
+        
+        .action-button:hover::before {
+            transform: translateX(0);
+        }
+        
+        .action-button:hover::after {
+            opacity: 1;
+        }
+        
+        .action-button:active {
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .nav-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.7);
+        }
+        
+        .nav-button:hover::before {
+            transform: translateX(0);
+        }
+        
+        .nav-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0;
+            transition: width 0.7s ease;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+        }
+        
+        .navigation-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .nav-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+        
+        .nav-dot:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .nav-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1.2s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .loading-spinner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .end-credits {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            color: var(--secondary-color);
+            animation: pulse 2.5s infinite;
+            text-shadow: 0 0 20px rgba(255, 158, 107, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .end-credits::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        /* Particle effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            opacity: 0;
+            animation: float-particle 15s infinite;
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Light rays effect */
+        .light-rays {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .light-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
+            transform-origin: top center;
+            animation: rotate-ray 20s infinite linear;
+        }
+        
+        .light-ray:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation-delay: 0s;
+        }
+        
+        .light-ray:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-delay: 2.5s;
+        }
+        
+        .light-ray:nth-child(3) {
+            transform: translate(-50%, -50%) rotate(90deg);
+            animation-delay: 5s;
+        }
+        
+        .light-ray:nth-child(4) {
+            transform: translate(-50%, -50%) rotate(135deg);
+            animation-delay: 7.5s;
+        }
+        
+        @keyframes rotate-ray {
+            0% { opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; }
+        }
+        
+        /* Glowing orbs effect */
+        .orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            filter: blur(10px);
+            opacity: 0.4;
+            animation: float-orb 20s infinite ease-in-out;
+        }
+        
+        .orb:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+            animation-delay: 5s;
+        }
+        
+        .orb:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 60%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -20px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(10px, 10px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .landmark-image {
+                height: 220px;
+            }
+            
+            .end-credits {
+                font-size: 1.5rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                max-width: 250px;
+            }
+            
+            .action-button {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="progress-bar" id="progressBar"></div>
+        
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+        </div>
+        
+        <!-- Particles Effect -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Light Rays Effect -->
+        <div class="light-rays">
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+        </div>
+        
+        <!-- Glowing Orbs Effect -->
+        <div class="orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        
+        <!-- Start Page -->
+        <div class="page active" id="page0">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/GbN577Zi1pI?autoplay=1&mute=1&loop=1&playlist=GbN577Zi1pI&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1596421604626-2b0c9e0c6c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Albanian Coast" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h1>Places to visit in Albania</h1>
+                <p>Discover the breathtaking beauty and rich cultural heritage of Albania through this virtual tour of its most stunning landmarks.</p>
+                <button class="action-button" id="startBtn">
+                    Start Tour <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 1: Berat Castle -->
+        <div class="page" id="page1">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/OskHcmJo1uo?autoplay=1&mute=1&loop=1&playlist=OskHcmJo1uo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1605007590374-47c1df5455a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Berat Castle" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-chess-rook"></i>
+                </div>
+                <h2>Berat Castle</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Berat, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1605007590374-47c1df5455a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berat Castle" class="landmark-image">
+                <p>Berat Castle is a magnificent fortress overlooking the historic town of Berat. Dating mainly from the 13th century, this UNESCO World Heritage site contains numerous Byzantine churches, Ottoman mosques, and traditional houses that offer a glimpse into Albania's rich cultural heritage.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Gjirokastër -->
+        <div class="page" id="page2">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/U7U-gf_LQkw?autoplay=1&mute=1&loop=1&playlist=U7U-gf_LQkw&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1599142351577-9c1a29d4b40b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Gjirokastër" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h2>Gjirokastër</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Gjirokastër, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1599142351577-9c1a29d4b40b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gjirokastër" class="landmark-image">
+                <p>Nestled in a valley between the Gjerë mountains and the Drino River, Gjirokastër is a captivating city known as the "City of Stone." Its well-preserved Ottoman architecture, distinctive stone-roofed houses, and imposing castle have earned it recognition as a UNESCO World Heritage Site.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Butrint National Park -->
+        <div class="page" id="page3">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/V9rOqE0oTI0?autoplay=1&mute=1&loop=1&playlist=V9rOqE0oTI0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1596474104294-0c9175d9415d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Butrint" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <h2>Butrint National Park</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Vlorë County, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1596474104294-0c9175d9415d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Butrint" class="landmark-image">
+                <p>Butrint National Park is home to an ancient Greek city and archaeological site that has been occupied since prehistoric times. This UNESCO World Heritage Site features impressive ruins including a theater, temple, and baptistery, all set within a beautiful natural landscape of forests and wetlands.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Krujë Castle -->
+        <div class="page" id="page4">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/SIxTr3WbZlY?autoplay=1&mute=1&loop=1&playlist=SIxTr3WbZlY&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1596436889106-be35e8cbf525?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Krujë Castle" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-fort-awesome"></i>
+                </div>
+                <h2>Krujë Castle</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Krujë, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1596436889106-be35e8cbf525?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Krujë Castle" class="landmark-image">
+                <p>Perched on a mountain overlooking the town of Krujë, this historic castle is one of Albania's most important landmarks. It served as the center of the Albanian resistance against the Ottoman Empire in the 15th century under the leadership of national hero Skanderbeg, whose museum is now housed within the castle walls.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5: Albanian Riviera -->
+        <div class="page" id="page5">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/_m3Ws5PBshM?autoplay=1&mute=1&loop=1&playlist=_m3Ws5PBshM&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Albanian Riviera" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <h2>Albanian Riviera</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Vlorë County, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Albanian Riviera" class="landmark-image">
+                <p>The Albanian Riviera is a stunning coastal area along the Ionian Sea, known for its crystal-clear turquoise waters, pristine beaches, and charming Mediterranean villages. From the vibrant nightlife of Dhërmi to the secluded beauty of Gjipe Beach, this stretch of coastline offers something for every traveler.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 6: Lake Ohrid -->
+        <div class="page" id="page6">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/IsyUr9IiK78?autoplay=1&mute=1&loop=1&playlist=IsyUr9IiK78&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1595760780347-f159642c59d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Lake Ohrid" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h2>Lake Ohrid</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Border of Albania & North Macedonia</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1595760780347-f159642c59d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lake Ohrid" class="landmark-image">
+                <p>Straddling the mountainous border between southwestern North Macedonia and eastern Albania, Lake Ohrid is one of Europe's deepest and oldest lakes. This UNESCO World Heritage Site is renowned for its exceptional biodiversity, crystal-clear waters, and numerous historical sites along its shores.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 7: Valbona Valley National Park -->
+        <div class="page" id="page7">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/aB29fIBBKHs?autoplay=1&mute=1&loop=1&playlist=aB29fIBBKHs&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1596421604626-2b0c9e0c6c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Valbona Valley" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h2>Valbona Valley National Park</h2>
+                <div class="landmark-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kukës County, Albania</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1596421604626-2b0c9e0c6c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Valbona Valley" class="landmark-image">
+                <p>Located in the Albanian Alps, Valbona Valley National Park is a paradise for nature lovers and hikers. The park features rugged mountain peaks, glacial valleys, and the stunning Valbona River. Its pristine beauty and diverse wildlife make it one of Albania's most spectacular natural attractions.</p>
+                <div class="nav-buttons">
+                    <button class="nav-button prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-button next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Page -->
+        <div class="page" id="page8">
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/GbN577Zi1pI?autoplay=1&mute=1&loop=1&playlist=GbN577Zi1pI&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Thank You" class="fallback-image">
+            <div class="content-card">
+                <div class="icon-container">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h1>Thank You!</h1>
+                <div class="end-credits">
+                    Made by: A.B and A.K
+                </div>
+                <button class="action-button" id="restartBtn" style="margin-top: 30px;">
+                    Restart Tour <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="navigation-dots" id="navigationDots">
+            <div class="nav-dot active" data-page="0"></div>
+            <div class="nav-dot" data-page="1"></div>
+            <div class="nav-dot" data-page="2"></div>
+            <div class="nav-dot" data-page="3"></div>
+            <div class="nav-dot" data-page="4"></div>
+            <div class="nav-dot" data-page="5"></div>
+            <div class="nav-dot" data-page="6"></div>
+            <div class="nav-dot" data-page="7"></div>
+            <div class="nav-dot" data-page="8"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            const navDots = document.querySelectorAll('.nav-dot');
+            const progressBar = document.getElementById('progressBar');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const particlesContainer = document.getElementById('particles');
+            let currentPage = 0;
+            const totalPages = pages.length;
+            let isTransitioning = false;
+            
+            // Create particles
+            function createParticles() {
+                const particleCount = 50;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Random properties
+                    const size = Math.random() * 5 + 2;
+                    const posX = Math.random() * 100;
+                    const delay = Math.random() * 15;
+                    const duration = Math.random() * 10 + 15;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    // Random color between primary and secondary
+                    const colorRatio = Math.random();
+                    const r = Math.floor(255 * (0.8 + 0.2 * colorRatio));
+                    const g = Math.floor(107 + 51 * colorRatio);
+                    const b = Math.floor(107 + 51 * colorRatio);
+                    particle.style.background = `rgb(${r}, ${g}, ${b})`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+            
+            // Function to show loading overlay
+            function showLoading() {
+                loadingOverlay.classList.add('active');
+            }
+            
+            // Function to hide loading overlay
+            function hideLoading() {
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('active');
+                }, 800);
+            }
+            
+            // Function to show a specific page
+            function showPage(pageIndex) {
+                if (isTransitioning || pageIndex < 0 || pageIndex >= totalPages) return;
+                
+                isTransitioning = true;
+                showLoading();
+                
+                // Hide current page
+                pages[currentPage].classList.remove('active');
+                navDots[currentPage].classList.remove('active');
+                
+                // Show new page after a short delay
+                setTimeout(() => {
+                    currentPage = pageIndex;
+                    pages[currentPage].classList.add('active');
+                    navDots[currentPage].classList.add('active');
+                    
+                    // Update progress bar
+                    const progress = ((currentPage + 1) / totalPages) * 100;
+                    progressBar.style.width = progress + '%';
+                    
+                    // Ensure video is playing
+                    const iframe = pages[currentPage].querySelector('iframe');
+                    if (iframe) {
+                        const src = iframe.src;
+                        iframe.src = '';
+                        setTimeout(() => {
+                            iframe.src = src;
+                        }, 100);
+                    }
+                    
+                    hideLoading();
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 500);
+                }, 300);
+            }
+            
+            // Start button functionality
+            document.getElementById('startBtn').addEventListener('click', function() {
+                showPage(1);
+            });
+            
+            // Restart button functionality
+            document.getElementById('restartBtn').addEventListener('click', function() {
+                showPage(0);
+            });
+            
+            // Previous button functionality
+            document.addEventListener('click', function(event) {
+                if (event.target.closest('.prev-btn')) {
+                    if (currentPage > 0) {
+                        showPage(currentPage - 1);
+                    }
+                }
+            });
+            
+            // Next button functionality
+            document.addEventListener('click', function(event) {
+                if (event.target.closest('.next-btn')) {
+                    if (currentPage < totalPages - 1) {
+                        showPage(currentPage + 1);
+                    }
+                }
+            });
+            
+            // Navigation dots functionality
+            navDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageIndex = parseInt(this.getAttribute('data-page'));
+                    showPage(pageIndex);
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'ArrowRight' && currentPage < totalPages - 1) {
+                    showPage(currentPage + 1);
+                } else if (event.key === 'ArrowLeft' && currentPage > 0) {
+                    showPage(currentPage - 1);
+                }
+            });
+            
+            // Touch support for mobile devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(event) {
+                touchStartX = event.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', function(event) {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold && currentPage < totalPages - 1) {
+                    showPage(currentPage + 1); // Swipe left, go to next page
+                }
+                if (touchEndX > touchStartX + swipeThreshold && currentPage > 0) {
+                    showPage(currentPage - 1); // Swipe right, go to previous page
+                }
+            }
+            
+            // Initialize progress bar
+            progressBar.style.width = ((currentPage + 1) / totalPages) * 100 + '%';
+            
+            // Preload videos for smoother experience
+            function preloadVideos() {
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    const src = iframe.src;
+                    iframe.src = '';
+                    setTimeout(() => {
+                        iframe.src = src;
+                    }, 100);
+                });
+            }
+            
+            // Preload videos after page load
+            window.addEventListener('load', () => {
+                setTimeout(preloadVideos, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
