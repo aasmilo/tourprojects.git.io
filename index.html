@@ -727,83 +727,6 @@
             75% { transform: translate(10px, 10px); }
         }
         
-        /* Magic sparkles effect */
-        .sparkles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
-            animation: sparkle-animation 3s infinite;
-            opacity: 0;
-        }
-        
-        @keyframes sparkle-animation {
-            0% { 
-                transform: translate(0, 0) scale(0);
-                opacity: 0;
-            }
-            50% { 
-                opacity: 1;
-            }
-            100% { 
-                transform: translate(var(--tx), var(--ty)) scale(1.5);
-                opacity: 0;
-            }
-        }
-        
-        /* Fireflies effect */
-        .fireflies {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .firefly {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            box-shadow: 0 0 10px 2px rgba(255, 158, 107, 0.8);
-            animation: fly 15s infinite;
-            opacity: 0;
-        }
-        
-        @keyframes fly {
-            0% { 
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            10% { 
-                opacity: 0.8;
-            }
-            90% { 
-                opacity: 0.8;
-            }
-            100% { 
-                transform: translate(var(--x), var(--y));
-                opacity: 0;
-            }
-        }
-        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             h1 {
@@ -869,12 +792,6 @@
             <div class="orb"></div>
         </div>
         
-        <!-- Magic Sparkles Effect -->
-        <div class="sparkles" id="sparkles"></div>
-        
-        <!-- Fireflies Effect -->
-        <div class="fireflies" id="fireflies"></div>
-        
         <!-- Start Page -->
         <div class="page active" id="page0">
             <div class="video-background">
@@ -911,10 +828,10 @@
                 <img src="https://images.unsplash.com/photo-1605007590374-47c1df5455a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berat Castle" class="landmark-image">
                 <p>Berat Castle is a magnificent fortress overlooking the historic town of Berat. Dating mainly from the 13th century, this UNESCO World Heritage site contains numerous Byzantine churches, Ottoman mosques, and traditional houses that offer a glimpse into Albania's rich cultural heritage.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="0">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="2">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -939,10 +856,10 @@
                 <img src="https://images.unsplash.com/photo-1599142351577-9c1a29d4b40b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gjirokastër" class="landmark-image">
                 <p>Nestled in a valley between the Gjerë mountains and the Drino River, Gjirokastër is a captivating city known as the "City of Stone." Its well-preserved Ottoman architecture, distinctive stone-roofed houses, and imposing castle have earned it recognition as a UNESCO World Heritage Site.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="1">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="3">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -967,10 +884,10 @@
                 <img src="https://images.unsplash.com/photo-1596474104294-0c9175d9415d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Butrint" class="landmark-image">
                 <p>Butrint National Park is home to an ancient Greek city and archaeological site that has been occupied since prehistoric times. This UNESCO World Heritage Site features impressive ruins including a theater, temple, and baptistery, all set within a beautiful natural landscape of forests and wetlands.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="2">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="4">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -995,10 +912,10 @@
                 <img src="https://images.unsplash.com/photo-1596436889106-be35e8cbf525?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Krujë Castle" class="landmark-image">
                 <p>Perched on a mountain overlooking the town of Krujë, this historic castle is one of Albania's most important landmarks. It served as the center of the Albanian resistance against the Ottoman Empire in the 15th century under the leadership of national hero Skanderbeg, whose museum is now housed within the castle walls.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="3">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="5">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1023,10 +940,10 @@
                 <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Albanian Riviera" class="landmark-image">
                 <p>The Albanian Riviera is a stunning coastal area along the Ionian Sea, known for its crystal-clear turquoise waters, pristine beaches, and charming Mediterranean villages. From the vibrant nightlife of Dhërmi to the secluded beauty of Gjipe Beach, this stretch of coastline offers something for every traveler.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="4">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="6">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1051,10 +968,10 @@
                 <img src="https://images.unsplash.com/photo-1595760780347-f159642c59d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lake Ohrid" class="landmark-image">
                 <p>Straddling the mountainous border between southwestern North Macedonia and eastern Albania, Lake Ohrid is one of Europe's deepest and oldest lakes. This UNESCO World Heritage Site is renowned for its exceptional biodiversity, crystal-clear waters, and numerous historical sites along its shores.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="5">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="7">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1079,10 +996,10 @@
                 <img src="https://images.unsplash.com/photo-1596421604626-2b0c9e0c6c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Valbona Valley" class="landmark-image">
                 <p>Located in the Albanian Alps, Valbona Valley National Park is a paradise for nature lovers and hikers. The park features rugged mountain peaks, glacial valleys, and the stunning Valbona River. Its pristine beauty and diverse wildlife make it one of Albania's most spectacular natural attractions.</p>
                 <div class="nav-buttons">
-                    <button class="nav-button prev-btn" data-target="6">
+                    <button class="nav-button prev-btn">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button class="nav-button next-btn" data-target="8">
+                    <button class="nav-button next-btn">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1129,8 +1046,6 @@
             const progressBar = document.getElementById('progressBar');
             const loadingOverlay = document.getElementById('loadingOverlay');
             const particlesContainer = document.getElementById('particles');
-            const sparklesContainer = document.getElementById('sparkles');
-            const firefliesContainer = document.getElementById('fireflies');
             let currentPage = 0;
             const totalPages = pages.length;
             let isTransitioning = false;
@@ -1165,57 +1080,7 @@
                 }
             }
             
-            // Create sparkles
-            function createSparkles() {
-                const sparkleCount = 20;
-                for (let i = 0; i < sparkleCount; i++) {
-                    const sparkle = document.createElement('div');
-                    sparkle.classList.add('sparkle');
-                    
-                    // Random properties
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const delay = Math.random() * 5;
-                    const tx = (Math.random() - 0.5) * 100;
-                    const ty = (Math.random() - 0.5) * 100;
-                    
-                    sparkle.style.left = `${posX}%`;
-                    sparkle.style.top = `${posY}%`;
-                    sparkle.style.animationDelay = `${delay}s`;
-                    sparkle.style.setProperty('--tx', `${tx}px`);
-                    sparkle.style.setProperty('--ty', `${ty}px`);
-                    
-                    sparklesContainer.appendChild(sparkle);
-                }
-            }
-            
-            // Create fireflies
-            function createFireflies() {
-                const fireflyCount = 15;
-                for (let i = 0; i < fireflyCount; i++) {
-                    const firefly = document.createElement('div');
-                    firefly.classList.add('firefly');
-                    
-                    // Random properties
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const delay = Math.random() * 10;
-                    const x = (Math.random() - 0.5) * 200;
-                    const y = (Math.random() - 0.5) * 200;
-                    
-                    firefly.style.left = `${posX}%`;
-                    firefly.style.top = `${posY}%`;
-                    firefly.style.animationDelay = `${delay}s`;
-                    firefly.style.setProperty('--x', `${x}px`);
-                    firefly.style.setProperty('--y', `${y}px`);
-                    
-                    firefliesContainer.appendChild(firefly);
-                }
-            }
-            
             createParticles();
-            createSparkles();
-            createFireflies();
             
             // Function to show loading overlay
             function showLoading() {
@@ -1268,28 +1133,31 @@
             }
             
             // Start button functionality
-            const startBtn = document.getElementById('startBtn');
-            if (startBtn) {
-                startBtn.addEventListener('click', function() {
-                    showPage(1);
-                });
-            }
+            document.getElementById('startBtn').addEventListener('click', function() {
+                showPage(1);
+            });
             
             // Restart button functionality
-            const restartBtn = document.getElementById('restartBtn');
-            if (restartBtn) {
-                restartBtn.addEventListener('click', function() {
-                    showPage(0);
-                });
-            }
+            document.getElementById('restartBtn').addEventListener('click', function() {
+                showPage(0);
+            });
             
-            // Navigation buttons functionality
-            const navButtons = document.querySelectorAll('.nav-button');
-            navButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetPage = parseInt(this.getAttribute('data-target'));
-                    showPage(targetPage);
-                });
+            // Previous button functionality
+            document.addEventListener('click', function(event) {
+                if (event.target.closest('.prev-btn')) {
+                    if (currentPage > 0) {
+                        showPage(currentPage - 1);
+                    }
+                }
+            });
+            
+            // Next button functionality
+            document.addEventListener('click', function(event) {
+                if (event.target.closest('.next-btn')) {
+                    if (currentPage < totalPages - 1) {
+                        showPage(currentPage + 1);
+                    }
+                }
             });
             
             // Navigation dots functionality
